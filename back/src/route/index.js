@@ -10,9 +10,10 @@ const post = require('./post')
 router.use('/', post)
 // Використовуйте інші файли роутів, якщо є
 
+
 router.get('/', (req, res) => {
   res.status(200).json('Hello World')
 })
-
+ 
 // Експортуємо глобальний роутер
 module.exports = router

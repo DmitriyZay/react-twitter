@@ -2,7 +2,7 @@ import { useState, Fragment } from "react";
 import Title from "../../component/title";
 import Grid from "../../component/grid";
 import Box from "../../component/box";
-
+import Postitem from "../post-item";
 import PostCreate from "../post-create";
 import { Alert, Skeleton, LOAD_STATUS } from "../../component/load";
 import { getDate } from "../utility/getDate";
@@ -40,6 +40,9 @@ export default function Container() {
     isEmpty: raw.list.length === 0,
   });
 
+  if (status===null){
+	getData();
+  }
   return (
     <Grid>
       <Box>
@@ -67,7 +70,17 @@ export default function Container() {
       )}
 
 {status === LOAD_STATUS.SUCCESS && (
-console.log(isEmpty)
+	<Fragment>
+          {data.isEmpty ? (
+            <Alert message="Список постів пустий" />
+          ) : (
+            data.list.map((item) => (
+              <Fragment key={item.id}>
+               <Postitem {...item}/>
+              </Fragment>
+            ))
+          )}
+        </Fragment>
 )}
     </Grid>
   );
